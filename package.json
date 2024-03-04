@@ -1,0 +1,44 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "winkbuy.com is robust ecommerce platform where user can get diverse options of products to buy which they need in there daily needs. Users will find best and affordable products which can be useful and helpful for daily use.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "best",
+    "products",
+    "ecommerce",
+    "homeneeds",
+    "dailyuseproducts",
+    "furniture",
+    "technology",
+    "garden",
+    "health&Beauty",
+    "Beauty",
+    "health",
+    "gym",
+    "workout",
+    "phone",
+    "speakers",
+    "amazon",
+    "echo",
+    "alexa",
+    "groceries",
+    "laptop",
+    "table",
+    "chair",
+    "clothings",
+    "apperal"
+  ],
+  "author": "ayush kanaujia",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.3",
+    "gitignore": "^0.7.0",
+    "mysql2": "^3.9.2",
+    "sequelize": "^6.37.1"
+  }
+}
