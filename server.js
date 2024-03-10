@@ -4,11 +4,17 @@ const bodyparser = require('body-parser');
 const http = require('http');
 const db_connection = require('./config/db')
 const routes = require('./routes/router')
+const Products = require('./models/Products');
+const Category = require('./models/Category');
+const Role = require('./models/Role');
+const User = require('./models/User');
+const Associations = require('./models/Associations');
+
 
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:3000/',
+    origin: 'http://localhost:3000',
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"]
@@ -20,7 +26,7 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 
 // Routes
-// app.use('/winkbuy', routes);
+app.use('/winkbuy', routes);
 
 // Testing API
 app.get('/', (req, res) => {
