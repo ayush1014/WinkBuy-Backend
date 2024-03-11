@@ -4,9 +4,9 @@ const Category = require('../models/Category');
 // Controller to get products by category
 exports.viewProductsByCategory = async (req, res) => {
     try {
-        const { categoryId } = req.params; // Assuming you're passing the category ID in the route parameter
+        const { category_name } = req.params; // Assuming you're passing the category ID in the route parameter
         const products = await Products.findAll({
-            where: { categoryId: categoryId },
+            where: { categoryId: category_name },
             include: [{
                 model: Category,
                 as: 'category',

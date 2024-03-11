@@ -25,7 +25,7 @@ const Products = db.define('Products',{
     },
 
     rating: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false,
     },
 
