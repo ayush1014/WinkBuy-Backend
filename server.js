@@ -8,6 +8,8 @@ const Products = require('./models/Products');
 const Category = require('./models/Category');
 const Role = require('./models/Role');
 const User = require('./models/User');
+const { Blogs, BlogsCategory, BlogsMain } = require('./models/Blogs');
+const MainCategory = require('./models/MainCategory');
 const Associations = require('./models/Associations');
 
 
