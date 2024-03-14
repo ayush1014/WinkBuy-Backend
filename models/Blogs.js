@@ -8,13 +8,17 @@ const BlogsMain = db.define('blogsMain', {
     primaryKey: true,
     allowNull: false
   },
-  blogViews: {
-    type: DataTypes.INTEGER,
-    allowNull: true
+  blogSummary: {
+    type: DataTypes.TEXT,
+    allowNull: false
   },
   blogCoverPhoto: {
     type: DataTypes.TEXT,
     allowNull: false
+  },
+  blogViews: {
+    type: DataTypes.INTEGER,
+    allowNull: true
   }
 });
 

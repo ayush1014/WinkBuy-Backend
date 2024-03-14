@@ -19,7 +19,7 @@ const adminControllers = {
 
   createBlog: async (req, res) => {
     try {
-      const { blogTitle, category, blogSections: blogSectionsJSON, blogCoverPhoto } = req.body; // Extract blogCoverPhoto here
+      const { blogTitle, category, blogSections: blogSectionsJSON, blogCoverPhoto, blogSummary } = req.body; // Extract blogCoverPhoto here
       const blogSections = JSON.parse(blogSectionsJSON);
 
       let coverPhotoPath = blogCoverPhoto; // Use the extracted blogCoverPhoto
@@ -33,7 +33,7 @@ const adminControllers = {
 
       const [newMainBlog, created] = await BlogsMain.findOrCreate({
         where: { blog: blogTitle },
-        defaults: { blog: blogTitle, blog_category: category, blogCoverPhoto: coverPhotoPath }
+        defaults: { blog: blogTitle, blog_category: category, blogCoverPhoto: coverPhotoPath, blogSummary: blogSummary }
       });
 
       // Process each section in sequence
