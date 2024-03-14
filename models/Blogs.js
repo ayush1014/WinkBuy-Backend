@@ -11,6 +11,10 @@ const BlogsMain = db.define('blogsMain', {
   blogViews: {
     type: DataTypes.INTEGER,
     allowNull: true
+  },
+  blogCoverPhoto: {
+    type: DataTypes.TEXT,
+    allowNull: false
   }
 });
 

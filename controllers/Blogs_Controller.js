@@ -19,12 +19,21 @@ const adminControllers = {
 
   createBlog: async (req, res) => {
     try {
-      const { blogTitle, category, blogSections: blogSectionsJSON } = req.body;
+      const { blogTitle, category, blogSections: blogSectionsJSON, blogCoverPhoto } = req.body; // Extract blogCoverPhoto here
       const blogSections = JSON.parse(blogSectionsJSON);
+
+      let coverPhotoPath = blogCoverPhoto; // Use the extracted blogCoverPhoto
+
+      // Check if a file is uploaded for the cover photo, assuming the field name is 'blogCoverPhoto'
+      const coverPhotoFile = req.files?.find(file => file.fieldname === 'blogCoverPhoto');
+      if (coverPhotoFile) {
+        coverPhotoPath = coverPhotoFile.location; // Use the file location if a file was uploaded
+        await makePublicRead(process.env.AWS_BUCKET_NAME, coverPhotoFile.key);
+      }
 
       const [newMainBlog, created] = await BlogsMain.findOrCreate({
         where: { blog: blogTitle },
-        defaults: { blog: blogTitle, blog_category: category }
+        defaults: { blog: blogTitle, blog_category: category, blogCoverPhoto: coverPhotoPath }
       });
 
       // Process each section in sequence
@@ -33,9 +42,8 @@ const adminControllers = {
 
         // Find the matching file based on the index
         const fileKey = `blogSections[${index}][blogPhotos]`;
-        const matchingFile = req.files.find(file => file.fieldname === fileKey);
+        const matchingFile = req.files?.find(file => file.fieldname === fileKey);
 
-        console.log('section.blogPhotos:', section.blogPhotos);
         if (matchingFile) {
           blog_pic = matchingFile.location; // Assuming this is the correct path
           await makePublicRead(process.env.AWS_BUCKET_NAME, matchingFile.key);
@@ -59,6 +67,7 @@ const adminControllers = {
       res.status(400).json({ error: error.message });
     }
   },
+
 
 
 
