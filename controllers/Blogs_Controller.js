@@ -75,7 +75,9 @@ const adminControllers = {
   // Read all blog posts
   getAllBlogs: async (req, res) => {
     try {
-      const blogs = await BlogsMain.findAll();
+      const blogs = await BlogsMain.findAll({
+        order: [['createdAt', 'DESC']]
+      });
       res.status(200).json(blogs);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -140,25 +142,39 @@ const adminControllers = {
 
 // User Controllers
 const userControllers = {
-  // Read a single blog post
+  // Read a single blog post along with its main details
   getBlog: async (req, res) => {
     try {
       const { blogTitle } = req.params;
-      const blog = await Blogs.findAll({ where: { blog: blogTitle } });
-      if (blog) {
-        // Increment the blog views
-        const mainBlog = await BlogsMain.findByPk(blogTitle);
-        mainBlog.blogViews += 1;
-        await mainBlog.save();
+      // Use include to join BlogsMain with Blogs
+      const blogs = await Blogs.findAll({
+        include: [{
+          model: BlogsMain,
+          as: 'main', // Ensure this alias matches the one defined in your association
+          required: true
+        }],
+        where: { blog: blogTitle }
+      });
 
-        res.status(200).json(blog);
+      if (blogs.length > 0) {
+        // Increment the blog views for the main blog
+        // Assuming blogTitle is the primaryKey for BlogsMain
+        const mainBlog = await BlogsMain.findByPk(blogTitle);
+        if (mainBlog) {
+          mainBlog.blogViews += 1;
+          await mainBlog.save();
+        }
+
+        res.status(200).json(blogs);
       } else {
         res.status(404).json({ message: 'Blog not found' });
       }
     } catch (error) {
+      console.error('Error fetching blog details:', error);
       res.status(500).json({ error: error.message });
     }
   },
+
 
   // Read all blog posts
   getAllBlogs: adminControllers.getAllBlogs,

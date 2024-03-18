@@ -1,6 +1,8 @@
 const Category = require('./Category');
 const MainCategory = require('./MainCategory');
 const Products = require('./Products');
+const User = require('../models/User')
+const Wishlist = require('../models/Wishlist');
 const {Sequelize} = require('sequelize');
 
 
@@ -18,11 +20,16 @@ Category.hasMany(Products, {
 
 MainCategory.belongsTo(Category,{
     foreignKey: 'main_category',
-    as: 'main',
+    as: 'mainCategory',
 });
 
 MainCategory.hasMany(Category, {
     foreignKey: 'main_category',
-    as: 'main_cat'
+    as: 'categories'
 })
 
+User.hasMany(Wishlist, { foreignKey: 'userId' });
+Wishlist.belongsTo(User, { foreignKey: 'userId' });
+
+Products.hasMany(Wishlist, { foreignKey: 'productId' });
+Wishlist.belongsTo(Products, { foreignKey: 'productId' });

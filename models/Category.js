@@ -8,6 +8,16 @@ const Category = db.define('Category', {
         allowNull: false
     },
 
+    category_number: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+
+    category_pic: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+
     main_category: {
         type: DataTypes.STRING,
         allowNull: false

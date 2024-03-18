@@ -19,8 +19,13 @@ const Products = db.define('Products',{
         allowNull: false
     },
 
+    winkReviews: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+
     product_Price: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
 
@@ -30,7 +35,7 @@ const Products = db.define('Products',{
     },
 
     rating_count: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
     },
 

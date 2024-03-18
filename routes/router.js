@@ -6,7 +6,6 @@ const User = require('../controllers/User_Controller');
 const {upload,makePublicRead} = require('../config/multer');
 const {adminControllers, userControllers} = require('../controllers/Blogs_Controller');
 
-
 //Authentication
 router.post('/signup', Authentication.Signup);
 router.post('/login', Authentication.Login);
@@ -19,8 +18,13 @@ router.post('/addMainCategory', Admin.addMainCategory);
 router.post('/addProduct', upload.single('product_pic'), Admin.addProduct);
 
 //user routers
+router.get('/main-category/:main_category_name/categories', User.viewCategoriesByMainCategory);
 router.get('/products/category/:category_name', User.viewProductsByCategory);
 router.get('/products/:productId', User.viewProductById);
+router.get('/products', User.viewAllProducts);
+router.post('/add', User.addToWishlist);
+router.get('/user/:userId', User.getWishlistByUser);
+router.delete('/remove', User.removeFromWishlist);
 
 //Admin Blog routers
 router.post('/admin/addBlogCategory', adminControllers.createCategory);

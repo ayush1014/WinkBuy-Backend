@@ -10,6 +10,7 @@ const Role = require('./models/Role');
 const User = require('./models/User');
 const { Blogs, BlogsCategory, BlogsMain } = require('./models/Blogs');
 const MainCategory = require('./models/MainCategory');
+const Wishlist = require('./models/Wishlist');
 const Associations = require('./models/Associations');
 
 
