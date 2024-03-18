@@ -38,4 +38,6 @@ router.delete('/admin/mainblogs/:blog', adminControllers.deleteMainBlog);
 router.get('/blogs/:blogTitle', userControllers.getBlog);
 router.get('/blogs', userControllers.getAllBlogs);
 router.get('/blogsByCategory/:category', userControllers.getBlogsByCategory);
+router.delete('/blogs/:id', adminControllers.deleteBlog);
+router.delete('/mainBlog/:blog', adminControllers.deleteMainBlog);
 module.exports = router; 
