@@ -18,7 +18,7 @@ const app = express();
 
 app.use(cors({
     // origin: 'http://localhost:3000',
-    origin: 'https://winkbuy.com',
+    origin: 'https://winkbuy.com/',
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"]
