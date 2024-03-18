@@ -17,7 +17,8 @@ const Associations = require('./models/Associations');
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    // origin: 'http://localhost:3000',
+    origin: 'https://wink-buy-frontend.vercel.app',
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"]
