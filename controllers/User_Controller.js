@@ -123,11 +123,23 @@ exports.viewProductById = async (req, res) => {
 
 // Controller to get all products
 exports.viewAllProducts = async (req, res) => {
+    const page = parseInt(req.query.page) || 1; 
+    const limit = parseInt(req.query.limit) || 4; 
+    const offset = (page - 1) * limit;
+
     try {
-        const products = await Products.findAll({
-            order: [['createdAt', 'DESC']]
+        const { count, rows: products } = await Products.findAndCountAll({
+            order: [['createdAt', 'DESC']],
+            offset: offset,
+            limit: limit,
         });
-        return res.status(200).send(products);
+
+        return res.status(200).send({
+            totalPages: Math.ceil(count / limit),
+            currentPage: page,
+            totalProducts: count,
+            products,
+        });
     } catch (error) {
         console.error('Error fetching all products: ', error);
         return res.status(500).send({ message: 'Error fetching all products', error: error.message });
