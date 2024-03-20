@@ -63,6 +63,7 @@ const Blogs = db.define('blogs', {
   },
   blogPhotos: {
     type: DataTypes.TEXT,
+    allowNull: true
   }
 });
 
